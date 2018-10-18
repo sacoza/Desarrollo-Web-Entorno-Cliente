@@ -1,6 +1,14 @@
 const readline = require('readline-sync');
 
 class ArtCientifico {
+    /**
+ * 
+ * @param {Titulo de Articulo Cientifico} tituloCientifico 
+ * @param {Autores de Articulo Cientifico} autores 
+ * @param {Número de Paginas de Articulo Cientifico} NumPaginas 
+ * @param {Año de publicación de Articulo Cientifico} anyoPublicacion 
+ * @param {Menciones de Articulo Cientifico} menciones 
+ */
     constructor(tituloCientifico, autores, NumPaginas, anyoPublicacion, menciones) {
         this.tituloCientifico = tituloCientifico;
         this.autores = autores;
@@ -11,6 +19,17 @@ class ArtCientifico {
 }
 
 class artRevista extends ArtCientifico {
+    /**
+     * 
+     * @param {Titulo de Articulo Cientifico} tituloCientifico 
+     * @param {Autores de Articulo Cientifico} autores 
+     * @param {Número de Paginas de Articulo Cientifico} NumPaginas 
+     * @param {Año de publicación de Articulo Cientifico} anyoPublicacion 
+     * @param {Menciones de Articulo Cientifico} menciones 
+     * @param {Titulo de Articulo Revista} tituloRevista 
+     * @param {Editorial de Articulo Revista} editorial 
+     * @param {Factor de Impacto de Articulo Revista} FactorImpacto 
+     */
     constructor(tituloCientifico, autores, NumPaginas, anyoPublicacion, menciones, tituloRevista, editorial, FactorImpacto) {
         super(tituloCientifico, autores, NumPaginas, anyoPublicacion, menciones);
         this.tituloRevista = tituloRevista;
@@ -19,6 +38,16 @@ class artRevista extends ArtCientifico {
     }
 }
 class ArtConferencia extends ArtCientifico {
+    /**
+     * 
+     * @param {Titulo de Articulo Cientifico} tituloCientifico 
+     * @param {Autores de Articulo Cientifico} autores 
+     * @param {Número de Paginas de Articulo Cientifico} NumPaginas 
+     * @param {Año de publicación de Articulo Cientifico} anyoPublicacion 
+     * @param {Menciones de Articulo Cientifico} menciones 
+     * @param {Nombre de Articulo Conferencia} nombre 
+     * @param {Lugar de Articulo Conferencia} lugar 
+     */
     constructor(tituloCientifico, autores, NumPaginas, anyoPublicacion, menciones, nombre, lugar) {
         super(tituloCientifico, autores, NumPaginas, anyoPublicacion, menciones);
         this.nombre = nombre;
@@ -28,9 +57,9 @@ class ArtConferencia extends ArtCientifico {
 class PatentesCinetificas {
     /**
      * 
-     * @param {*} autor 
-     * @param {*} anyoPublicacion2 
-     * @param {*} anyoVencimiento 
+     * @param {autor} autor 
+     * @param {año de publicación} anyoPublicacion2 
+     * @param {Año de Vencimiento} anyoVencimiento 
      */
     constructor(autor, anyoPublicacion2, anyoVencimiento) {
         this.autor = autor;
@@ -38,7 +67,9 @@ class PatentesCinetificas {
         this.anyoVencimiento = anyoVencimiento;
     }
 }
+/*Array*/
 let lista = [];
+/*Opción Salir*/
 let salir = false;
 while (!salir) {
     console.log('Bienvenidos...');
@@ -49,6 +80,9 @@ while (!salir) {
     console.log('7)Modificar');
     console.log('-1)Salir del sistema');
     let opcion = readline.questionInt('Por favor, seleccione una de estas opciones: ');
+
+    /*INSERTAR*/
+
     if (opcion === 1) {
         let tituloCientifico = readline.question('Por favor, introduce el titulo Cientifico ');
         let autores = readline.question('Por favor, introduce el autor ');
@@ -126,6 +160,9 @@ while (!salir) {
                 }
             }
         }
+
+        /*BORRAR*/
+
     } else if (opcion === 6) {
         console.log('1)Borrar Articulo Revista');
         console.log('2)Borrar Articulo Conferencia');
@@ -135,17 +172,17 @@ while (!salir) {
         if (buscar === 1) {
             /*Articulo Cientifico*/
             let tituloRevista = readline.question('Por favor introduce un titulo de revista: ');
-            let modificado = false;
+            let encontrado = false;
             for (let i = 0; i < lista.length; i++) {
                 let artRevista = lista[i];
                 if (artRevista.tituloRevista === tituloRevista) {
                     lista.splice(i, 1);
-                    modificado = true;
+                    encontrado = true;
                     break;
                 }
             }
 
-            if (autormodificado) {
+            if (encontrado) {
                 console.log('Articulo encontrado y borrado del sistema');
                 console.log(lista);
             } else {
@@ -155,17 +192,17 @@ while (!salir) {
         if (buscar === 2) {
             /*Articulo Cientifico*/
             let nombre = readline.question('Por favor introduce un nombre: ');
-            let modificado = false;
+            let encontrado = false;
             for (let i = 0; i < lista.length; i++) {
                 let ArtConferencia = lista[i];
                 if (ArtConferencia.nombre === nombre) {
                     lista.splice(i, 1);
-                    modificado = true;
+                    encontrado = true;
                     break;
                 }
             }
 
-            if (modificado) {
+            if (encontrado) {
                 console.log('Articulo encontrado y borrado del sistema');
                 console.log(lista);
             } else {
@@ -175,23 +212,26 @@ while (!salir) {
         if (buscar === 3) {
             /*Articulo Cientifico*/
             let autor = readline.question('Por favor introduce un autor: ');
-            let modificado = false;
+            let encontrado = false;
             for (let i = 0; i < lista.length; i++) {
                 let PatentesCinetificas = lista[i];
                 if (PatentesCinetificas.autor === autor) {
                     lista.splice(i, 1);
-                    modificado = true;
+                    encontrado = true;
                     break;
                 }
             }
 
-            if (modificado) {
+            if (encontrado) {
                 console.log('Articulo encontrado y borrado del sistema');
                 console.log(lista);
             } else {
                 console.log('Articulo no encontrado en el sistema');
             }
         }
+
+        /*MODIFICAR*/
+
     } else if (opcion === 7) {
         console.log('1)Modificar Articulo Revista');
         console.log('2)Modificar Articulo Conferencia');
